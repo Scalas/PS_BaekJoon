@@ -1,7 +1,6 @@
 import sys
 
 input = sys.stdin.readline
-out = sys.stdout.write
 
 
 def sol2609():

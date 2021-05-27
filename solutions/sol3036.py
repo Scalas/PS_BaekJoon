@@ -12,7 +12,7 @@ def gcd(a, b):
 
 
 def sol3036():
-    n = int(input())
+    input()
     rings = list(map(int, input().split()))
     answer = []
     for ring in rings[1:]:

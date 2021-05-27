@@ -17,7 +17,6 @@ def sol1934():
         a, b = map(int, input().split())
         if (a < b):
             a, b = b, a
-
         answer = a * b // gcd(a, b)
         out(f'{answer}\n')
 

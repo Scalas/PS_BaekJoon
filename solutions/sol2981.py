@@ -37,6 +37,7 @@ def sol2981():
             answer.append(m)
             if(m != g//m):
                 answer.append(g//m)
+
     answer.append(g)
     answer.sort()
     print(*answer)
