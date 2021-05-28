@@ -20,5 +20,3 @@ def sol1934():
         answer = a * b // gcd(a, b)
         out(f'{answer}\n')
 
-
-sol1934()

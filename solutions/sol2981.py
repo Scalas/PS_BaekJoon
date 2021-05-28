@@ -42,5 +42,3 @@ def sol2981():
     answer.sort()
     print(*answer)
 
-
-sol2981()

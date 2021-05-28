@@ -25,4 +25,3 @@ def sol3036():
     print(*answer, sep='\n')
 
 
-sol3036()

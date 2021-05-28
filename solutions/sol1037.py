@@ -9,3 +9,5 @@ def sol1037():
     div.sort()
 
     print(div[0]*div[-1])
+
+
