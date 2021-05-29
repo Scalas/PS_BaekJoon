@@ -17,6 +17,3 @@ def sol17298():
             answer[st.pop()[1]] = num[0]
         st.append(num)
     print(' '.join(map(str, answer)))
-
-
-sol17298()
