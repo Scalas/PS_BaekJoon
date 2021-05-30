@@ -1,3 +1,3 @@
-from solutions.sol11866 import sol11866 as sol
+from solutions.sol1021 import sol1021 as sol
 
 sol()
