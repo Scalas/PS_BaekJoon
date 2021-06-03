@@ -17,6 +17,7 @@ def sol15649():
 def dfs(n, m, choosed, seq):
     if (len(seq) == m):
         sys.stdout.write(' '.join(seq) + '\n')
+        return
 
     for num in range(1, n + 1):
         if choosed[num - 1]:
