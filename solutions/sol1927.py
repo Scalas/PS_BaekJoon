@@ -1,13 +1,13 @@
 import sys
 import heapq
 
-input = sys.stdin.readline
+input = sys.stdin.read
 
 
-# 11279 최대힙
-# 최대힙 구현문제
+# 1927 최소 힙
+# 최소힙 구현문제
 
-# 직접 최대 힙을 구현한 풀이
+# 직접 힙을 구현한 풀이
 # 리스트에 push, pop 연산만을 구현하여 해결
 class Heap:
     def __init__(self):
@@ -18,7 +18,7 @@ class Heap:
         idx = len(self.q) - 1
         while idx > 0:
             parent = (idx - 1) // 2 if idx % 2 != 0 else (idx - 2) // 2
-            if (parent >= 0 and self.q[parent] < e):
+            if (parent >= 0 and self.q[parent] > e):
                 self.q[parent], self.q[idx] = e, self.q[parent]
                 idx = parent
             else:
@@ -36,10 +36,10 @@ class Heap:
         while True:
             l, r = idx * 2 + 1, idx * 2 + 2
             t = None
-            if (l < len(self.q) and self.q[l] > self.q[idx]):
+            if (l < len(self.q) and self.q[l] < self.q[idx]):
                 t = l
-            if (r < len(self.q) and self.q[r] > self.q[idx]):
-                if t == None or self.q[r] > self.q[t]:
+            if (r < len(self.q) and self.q[r] < self.q[idx]):
+                if t == None or self.q[r] < self.q[t]:
                     t = r
             if not t:
                 break
@@ -48,31 +48,27 @@ class Heap:
         return ret
 
 
-def sol11279():
-    n = int(input())
-    cmds = [int(input()) for _ in range(n)]
+def sol1927():
+    cmd = list(map(int, input().splitlines()))[1:]
     heap = Heap()
-    size = 0
     answer = []
-    for cmd in cmds:
-        if cmd == 0:
+    for c in cmd:
+        if (c == 0):
             answer.append(heap.pop())
         else:
-            heap.push(cmd)
-
+            heap.push(c)
     print('\n'.join(answer))
 
 
-# heapq 모듈을 사용하여 간단하게 구현 가능
-# 직접 힙을 구현한 것 보다 훨씬 빠른 속도를 보임
-def sol11279():
-    n = int(input())
-    cmds = [int(input()) for _ in range(n)]
-    q = []
+# heapq 모듈을 사용한 풀이
+# 직접 힙을 구현하는 것 보다 훨씬 빠른 속도를 보인다
+def sol1927_2():
+    cmd = list(map(int, input().splitlines()))[1:]
+    heap = []
     answer = []
-    for cmd in cmds:
-        if (cmd == 0):
-            answer.append('0' if not q else str(-heapq.heappop(q)))
+    for c in cmd:
+        if (c == 0):
+            answer.append('0' if not heap else str(heapq.heappop(heap)))
         else:
-            heapq.heappush(q, -cmd)
+            heapq.heappush(heap, c)
     print('\n'.join(answer))
