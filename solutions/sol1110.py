@@ -1,6 +1,7 @@
 import sys
 
 
+# 1110 더하기 사이클
 def sol1110():
     n = int(sys.stdin.readline())
     num = func(n)
