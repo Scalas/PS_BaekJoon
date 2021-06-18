@@ -44,7 +44,3 @@ def sol2108():
             med = num
 
     print(round(s/n), med, mode, ma-mi, sep='\n')
-
-
-if __name__ == '__main__':
-    sol2108()
