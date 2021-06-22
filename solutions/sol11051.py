@@ -21,7 +21,7 @@ def sol11051():
 # 풀이 2. 동적계획법을 활용한 방식
 # c(n, k) = c(n-1, k-1) + c(n-1, k) 임을 이용한 풀이
 # 다른 언어로 포팅하여도 오버플로우가 발생할 위험이 없다
-def sol11051():
+def sol11051_2():
     n, k = map(int, input().split())
     dp = [[0]*(n+1) for _ in range(n+1)]
     for i in range(1, n+1):
