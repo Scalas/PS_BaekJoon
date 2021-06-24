@@ -45,4 +45,3 @@ def sol2004():
 
     # 분모의 2와 5의 갯수에서 분자의 2와 5의 갯수를 각각 뺀 뒤 작은 쪽을 출력
     print(min(ncount[0]-mcount[0], ncount[1]-mcount[1]))
-
