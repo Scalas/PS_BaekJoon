@@ -15,22 +15,17 @@ input = sys.stdin.readline
 # c(n1+1, 1) * c(n2+1, 1) * ... * c(nk+1, 1) - 1
 def sol9375():
     answer = []
-    for t in range(int(input())):
-        n = int(input())
-        kinds = {}
-        # 옷의 종류별 가짓수를 저장
-        for _ in range(n):
-            name, kind = input().split()
-            if kinds.get(kind) == None:
-                kinds[kind] = 1
-            else:
-                kinds[kind] += 1
+    for case in range(int(input())):
+        ctype = {}
+        for _ in range(int(input())):
+            n, t = input().split()
+            try:
+                ctype[t] += 1
+            except:
+                ctype[t] = 2
+        res = 1
+        for c in ctype.values():
+            res *= c
+        answer.append(str(res - 1))
 
-        # 종류별 가짓수+1 을 모두 곱한 뒤 -1
-        answer = 1
-        for num in kinds.values():
-            answer *= (num + 1)
-        answer.append(answer - 1)
-
-    print(*answer, sep='\n')
-
+    print('\n'.join(answer))
