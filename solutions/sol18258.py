@@ -10,21 +10,22 @@ input = sys.stdin.read
 def sol18258():
     q = deque()
     answer = []
-    for i in input().splitlines()[1:]:
-        spl = i.split()
-        cmd = spl[0]
-        if (cmd == 'push'):
-            q.append(spl[1])
-        elif (cmd == 'pop'):
-            answer.append('-1' if not q else q.popleft())
-        elif (cmd == 'size'):
-            answer.append(str(len(q)))
-        elif (cmd == 'empty'):
-            answer.append('0' if q else '1')
-        elif (cmd == 'front'):
-            answer.append('-1' if not q else q[0])
-        elif (cmd == 'back'):
-            answer.append('-1' if not q else q[-1])
+    for c in sys.stdin.read().splitlines()[1:]:
+        if len(c) > 5:
+            q.append(c.split()[1])
+        else:
+            c = c[0]
+            if c == 'p':
+                answer.append(q.popleft() if q else '-1')
+            elif c == 'f':
+                answer.append(q[0] if q else '-1')
+            elif c == 'b':
+                answer.append(q[-1] if q else '-1')
+            elif c == 's':
+                answer.append(str(len(q)))
+            else:
+                answer.append('1' if not q else '0')
+
     print('\n'.join(answer))
 
 
