@@ -23,20 +23,16 @@ def sol2164():
 
 # 한바퀴 돌때마다 뭉치의 갯수가 짝수라면 짝수번째 요소를 기존 순서대로 줄세운 형태가 되며
 # 홀수라면 짝수번째 요소를 기존 순서대로 줄세운 뒤 첫번째 요소를 맨 뒤로 보낸 형태가 되는 것을 이용한 풀이
-# 큐를 사용하지 않을 뿐 첫 번째 풀이와 큰 차이는 없음
-def sol2164():
-    n = int(input())
-
-    cards = [num for num in range(1, n + 1)]
+# 큐를 사용하지 않을 뿐 첫 번째 풀이와 원리는 다르지않음
+def sol2164_2():
+    cards = list(range(1, int(sys.stdin.read()) + 1))
     l = len(cards)
-    while (l > 1):
-        if (l % 2 == 0):
-            cards = [cards[i] for i in range(1, l, 2)]
-            l = len(cards)
+    while l > 1:
+        if l % 2 == 0:
+            cards = cards[1::2]
         else:
-            tmp = cards[1]
-            cards = [cards[i] for i in range(3, l, 2)]
-            cards.append(tmp)
-            l = len(cards)
-
+            f = cards[1]
+            cards = cards[3::2]
+            cards.append(f)
+        l = l // 2
     print(cards[0])
