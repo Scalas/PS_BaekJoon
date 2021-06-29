@@ -11,28 +11,28 @@ def sol10866():
     answer = []
     for line in input().splitlines()[1:]:
         cmd = line.split()
-        if (cmd[0] == 'push_front'):
+        if cmd[0] == 'push_front':
             q.appendleft(cmd[1])
 
-        elif (cmd[0] == 'push_back'):
+        elif cmd[0] == 'push_back':
             q.append(cmd[1])
 
-        elif (cmd[0] == 'pop_front'):
+        elif cmd[0] == 'pop_front':
             answer.append('-1' if not q else q.popleft())
 
-        elif (cmd[0] == 'pop_back'):
+        elif cmd[0] == 'pop_back':
             answer.append('-1' if not q else q.pop())
 
-        elif (cmd[0] == 'size'):
+        elif cmd[0] == 'size':
             answer.append(str(len(q)))
 
-        elif (cmd[0] == 'empty'):
+        elif cmd[0] == 'empty':
             answer.append('0' if q else '1')
 
-        elif (cmd[0] == 'front'):
+        elif cmd[0] == 'front':
             answer.append('-1' if not q else q[0])
 
-        elif (cmd[0] == 'back'):
+        elif cmd[0] == 'back':
             answer.append('-1' if not q else q[-1])
 
     print('\n'.join(answer))
