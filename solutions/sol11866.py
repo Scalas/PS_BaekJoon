@@ -94,3 +94,15 @@ def sol11866_3():
             q.append(q.popleft())
         answer.append(q.popleft())
     print('<'+', '.join(answer)+'>')
+
+
+# 큐를 이용한 풀이를 리스트 연산으로 대체한 풀이
+def sol11866_4():
+    n, k = map(int, sys.stdin.readline().split())
+    seq = [*range(1, n+1)]
+    answer = []
+    while seq:
+        i = (k-1) % len(seq)
+        answer.append(str(seq[i]))
+        seq = seq[i+1:] + seq[:i]
+    print('<' + ', '.join(answer) + '>')
