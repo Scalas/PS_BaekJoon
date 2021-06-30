@@ -16,22 +16,22 @@ def sol2630():
 
 
 def cut(paper, x, y, l):
-    check = paper[x][y]
-    # 색종이의 색이 다른 부분이 하나라도 있으면 check 값을 -1로 하고 break
-    for i in range(x, x + l):
-        for j in range(y, y + l):
-            if paper[i][j] != check:
-                check = -1
-                break
+    # 1칸짜리 색종이일 경우
+    if l == 1:
+        c = int(paper[x][y])
+        res[c] += 1
+        return c
 
-    # 색종이가 한 가지 색으로 칠해져있는 경우
-    if check != -1:
-        res[int(check)] += 1
-        return
-
-    # 잘라야할 경우
     nl = l // 2
-    cut(paper, x, y, nl)
-    cut(paper, x + nl, y, nl)
-    cut(paper, x, y + nl, nl)
-    cut(paper, x + nl, y + nl, nl)
+    cnt = cut(paper, x, y, nl) + cut(paper, x + nl, y, nl) + cut(paper, x, y + nl, nl) + cut(paper, x + nl, y + nl, nl)
+    # 잘라낸 네 부분이 모두 같은 색의 색종이였을 경우
+    # 갯수가 세 번 추가로 더해졌기 때문에 3만큼 빼준다
+    if cnt == 4:
+        res[1] -= 3
+        return 1
+    elif cnt == 0:
+        res[0] -= 3
+        return 0
+
+    # 모두 같은 색종이가 아닌경우
+    return -4
