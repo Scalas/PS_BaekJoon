@@ -51,7 +51,3 @@ def fact(a, b):
         ret *= i
         ret %= mod
     return ret
-
-
-if __name__ == '__main__':
-    sol11401()
