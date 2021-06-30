@@ -1,6 +1,5 @@
 import sys
 
-sys.setrecursionlimit(10000)
 input = sys.stdin.readline
 
 
@@ -15,13 +14,14 @@ def sol1629():
 
 def mult(a, b, c):
     # b가 1이하일 경우 a의 b승을 c로 나눈 값을 반환
-    if (b <= 1):
-        return a ** b % c
+    if (b == 1):
+        return a % c
 
     # b를 2로 나누어 재귀호출한 뒤 그 결과를 제곱하고 c로 나눈 값을 반환
     # b가 홀수일 경우 제곱한 값에 a를 한번 더 곱한 뒤 c로 나눈다
     m = b // 2
+    res = mult(a, m, c)
     if (b % 2 == 0):
-        return mult(a, m, c) ** 2 % c
+        return (res * res) % c
     else:
-        return mult(a, m, c) ** 2 * a % c
+        return (res * res * a) % c
