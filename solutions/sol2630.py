@@ -1,10 +1,7 @@
 import sys
 
 input = sys.stdin.readline
-n = int(input())
-paper = [list(map(int, input().split())) for _ in range(n)]
-answer = [0, 0]
-
+res = [0, 0]
 
 # 2630 색종이 만들기
 # 2의 제곱수를 변의 길이로 가지는 정사각형 색종이를
@@ -12,39 +9,29 @@ answer = [0, 0]
 # 더이상 자를 수 없게 됐을 때 색상별 색종이의 수를 구하는 문제
 # 색종이의 범위를 매개변수로 재귀함수를 호출하여 해결할 수 있다
 def sol2630():
-    # 색종이 전체범위에서 자르기 시작
-    cut((0, n), (0, n))
-    print(answer)
+    n = int(input())
+    paper = [input().split() for _ in range(n)]
+    cut(paper, 0, 0, n)
+    print('\n'.join(map(str, res)))
 
 
-def cut(r, c):
-    global paper
-    global answer
-
-    # 색종이의 색이 다른 부분이 하나라도 있으면 check 값을 참으로 하고 break
-    color = paper[r[0]][c[0]]
-    check = False
-    for i in range(r[0], r[1]):
-        for j in range(c[0], c[1]):
-            if (paper[i][j] != color):
-                check = True
+def cut(paper, x, y, l):
+    check = paper[x][y]
+    # 색종이의 색이 다른 부분이 하나라도 있으면 check 값을 -1로 하고 break
+    for i in range(x, x + l):
+        for j in range(y, y + l):
+            if paper[i][j] != check:
+                check = -1
                 break
-        if (check):
-            break
 
-    # 색종이가 한 가지 색으로 칠해져있지 않은 경우(잘라야할 경우)
-    if (check):
-        # 가로/세로 중간지점
-        mr = r[0] + (r[1] - r[0]) // 2
-        mc = c[0] + (c[1] - c[0]) // 2
+    # 색종이가 한 가지 색으로 칠해져있는 경우
+    if check != -1:
+        res[int(check)] += 1
+        return
 
-        # 잘라진 네개의 색종이의 범위를 매개변수로 재귀호출
-        cut((r[0], mr), (c[0], mc))
-        cut((mr, r[1]), (c[0], mc))
-        cut((r[0], mr), (mc, c[1]))
-        cut((mr, r[1]), (mc, c[1]))
-
-    # 색종이가 한 가지 색으로 칠해져있는 경우(자를 필요가 없는 경우)
-    # 해당 색상의 색종이 수 +1
-    else:
-        answer[color] += 1
+    # 잘라야할 경우
+    nl = l // 2
+    cut(paper, x, y, nl)
+    cut(paper, x + nl, y, nl)
+    cut(paper, x, y + nl, nl)
+    cut(paper, x + nl, y + nl, nl)
