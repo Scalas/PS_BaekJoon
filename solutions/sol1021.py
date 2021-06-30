@@ -38,3 +38,23 @@ def sol1021():
                 l.appendleft(l.pop())
             l.pop()
     print(answer)
+
+
+# 리스트 슬라이싱만을 이용한 풀이
+def sol1021_2():
+    n, m, *select = map(int, sys.stdin.read().split())
+    q = list(range(n, 0, -1))
+    answer = 0
+    for s in select:
+        l = len(q) - q.index(s) -1
+        if l == 0:
+            q.pop()
+            continue
+
+        r = len(q) - l
+        if l < r:
+            answer += l
+        else:
+            answer += r
+        q = q[r:] + q[:r - 1]
+    print(answer)
