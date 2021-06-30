@@ -32,3 +32,28 @@ def cut(r, c):
         return (f'({cut((r[0], mr), (c[0], mc))}{cut((r[0], mr), (mc, c[1]))}{cut((mr, r[1]), (c[0], mc))}{cut((mr, r[1]), (mc, c[1]))})')
     else:
         return color
+
+
+# 해당 범위의 색이 모두 같은 경우의 처리를 조금 달리한 풀이
+# 매번 범위의 크기만큼 반복문을 돌리지 않고 네 구역의 반환값이 모두 같은지를 검사하는 방식
+def sol1992_2():
+    n = int(input())
+    paper = [list(input()) for _ in range(n)]
+    print(cut_2(paper, 0, 0, n))
+
+
+def cut_2(paper, x, y, l):
+    # 점 하나일 경우
+    if l == 1:
+        return paper[x][y]
+
+    nl = l // 2
+    res = [cut_2(paper, x, y, nl), cut_2(paper, x, y + nl, nl), cut_2(paper, x + nl, y, nl), cut_2(paper, x + nl, y + nl, nl)]
+    # 잘라낸 네 부분이 모두 같은 색의 점인 경우
+    c = res[0]
+    if c[0]=='(':
+        return '(' + ''.join(res) + ')'
+    for i in res[1:]:
+        if i != c:
+            return '(' + ''.join(res) + ')'
+    return c
