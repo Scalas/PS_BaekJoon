@@ -28,15 +28,15 @@ def matmult(a, b):
         for j in range(n):
             for k in range(n):
                 ret[i][j] += a[i][k] * b[k][j]
-                ret[i][j] = ret[i][j] % mod
+                ret[i][j] %= mod
     return ret
 
 
 def matsq(a, b):
-    if (b == 1):
+    if b == 1:
         return a
     ret = matsq(a, b // 2)
     ret = matmult(ret, ret)
-    if (b % 2 != 0):
+    if b % 2 != 0:
         ret = matmult(ret, a)
     return ret
