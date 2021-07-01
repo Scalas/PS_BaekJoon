@@ -17,9 +17,5 @@ def sol2740():
 
 def matmult(a, b):
     r, c, m = len(a), len(b[0]), len(b)
-    res = [[0] * c for _ in range(r)]
-    for i in range(r):
-        for j in range(c):
-            for k in range(m):
-                res[i][j] += a[i][k] * b[k][j]
-    return res
+    b = list(zip(*b))
+    return [[sum([i * j for i, j in zip(a[row], b[col])]) for col in range(c)] for row in range(r)]
