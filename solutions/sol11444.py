@@ -1,7 +1,7 @@
 import sys
 
 input = sys.stdin.readline
-MOD = 1000000007
+mod = 1000000007
 
 
 # 11444 피보나치 수 6
@@ -12,41 +12,28 @@ MOD = 1000000007
 # [[f1, f2]]를 얻을 수 있다
 # 즉, fn은 행렬 ([[0, 1]] * ([[0, 1], [1, 1]]) ^ (n-1))의 두 번째 요소가 된다
 def sol11444():
-    global MOD
-
     n = int(input())
-    print(fibo(n) % MOD)
-
-
-def fibo(n):
-    if (n <= 1):
-        return n
-    start = [[0, 1]]
-    base = [[0, 1], [1, 1]]
-    base = matsq(base, n - 1)
-    res = matmult(start, base)
-    return res[0][1]
+    if n == 1:
+        print(1)
+        return
+    fibo = [[0, 1]]
+    mat = [[0, 1], [1, 1]]
+    fibo = matmult(fibo, matsq(mat, n - 1))
+    print(fibo[0][1])
 
 
 def matmult(a, b):
-    global mod
-
-    r, c = len(a), len(b[0])
-    m = len(a[0])
-    ret = [[0] * c for _ in range(r)]
-    for i in range(r):
-        for j in range(c):
-            for k in range(m):
-                ret[i][j] += a[i][k] * b[k][j]
-                ret[i][j] %= MOD
-    return ret
+    r, c, m = len(a), len(b[0]), len(b)
+    b = list(zip(*b))
+    return [[sum([i * j for i, j in zip(a[row], b[col])]) % mod for col in range(c)] for row in range(r)]
 
 
 def matsq(a, b):
-    if (b == 1):
+    if b == 1:
         return a
-    ret = matsq(a, b // 2)
-    ret = matmult(ret, ret)
-    if (b % 2 != 0):
-        ret = matmult(ret, a)
-    return ret
+    m = b // 2
+    res = matsq(a, m)
+    res = matmult(res, res)
+    if b % 2 != 0:
+        res = matmult(res, a)
+    return res
