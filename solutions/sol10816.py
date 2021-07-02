@@ -35,7 +35,6 @@ def sol10816_2():
     input()
     cards = input().split()
     cards.sort()
-
     answer = []
     input()
     for num in input().split():
