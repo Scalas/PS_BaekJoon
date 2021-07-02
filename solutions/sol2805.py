@@ -27,47 +27,18 @@ def sol2805():
     print(answer)
 
 
-# 높이의 lower bound 를 통나무가 모두 균등한 높이일때 m 만큼을 가져가기 위한 높이로 잡았을 때 ((sum(woods)-m) // n)
-# 탐색의 범위가 줄어들어 첫 번째 방식의 1/3정도로 소요시간이 감소
-def sol2805_2():
-    n, m = map(int, input().split())
-    woods = list(map(int, input().split()))
-    sw = sum(woods)
-    s, e = (sw - m) // len(woods), max(woods)
-    answer = 0
-    while (s <= e):
-        mid = (s + e) // 2
-        if (sum([wood - mid for wood in woods if wood > mid]) >= m):
-            answer = mid
-            s = mid + 1
-        else:
-            e = mid - 1
-    print(answer)
-
-
 # 길이가 같은 통나무가 여러개 있을 수 있기 때문에 Counter 클래스를 사용
 # 가져갈 통나무의 길이의 합을 (나무의길이-벌목기높이)*나무의갯수 로 구함
-# m 이상의 길이의 나무를 가져갈 수 있는지 확인하는 작업이 빨라져 소요시간이 두 번째 방법의 1/3 이하로 감소
-def sol2805_3():
-    n, m = map(int, input().split())
-    woods = Counter(map(int, input().split()))
-    s, e = (sum([wood * c for wood, c in woods.items()]) - m) // n, max(woods)-1
+def sol2805_2():
+    n, m = map(int, sys.stdin.readline().split())
+    woods = Counter(map(int, sys.stdin.read().split())).items()
+    s, e = 0, max(woods)[0]
     answer = 0
-    while (s <= e):
+    while s <= e:
         mid = (s + e) // 2
-        if check(woods, mid, m):
+        if sum([(wood - mid) * c if wood > mid else 0 for wood, c in woods]) >= m:
             answer = mid
             s = mid + 1
         else:
             e = mid - 1
     print(answer)
-
-
-def check(woods, h, m):
-    res = 0
-    for wood, c in woods.items():
-        l = wood - h
-        if (l > 0):
-            res += l * c
-
-    return res >= m
