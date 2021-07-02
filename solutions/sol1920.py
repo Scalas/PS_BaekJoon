@@ -38,10 +38,14 @@ def search(arr, s, e, t):
 # 배열 A의 요소들을 set 에 삽입하는데 O(N) (set 의 삽입, 삭제, 탐색, 포함여부 연산은 모두 O(1))
 # M개의 숫자를 탐색하는데 각각 O(1)씩 O(M)
 def sol1920_2():
-    input()
-    a = set(map(int, input().split()))
-    input()
+    i = list(map(int, sys.stdin.read().split()))
+    n = i[0]
+    m = i[n + 1]
+
+    a = set(i[1:n + 1])
+
     answer = []
-    for num in list(map(int, input().split())):
+    for num in i[n + 2:]:
         answer.append('1' if num in a else '0')
-    sys.stdout.write('\n'.join(answer))
+
+    print('\n'.join(answer))
