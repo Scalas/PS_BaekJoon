@@ -63,11 +63,11 @@ def sol1927():
 # heapq 모듈을 사용한 풀이
 # 직접 힙을 구현하는 것 보다 훨씬 빠른 속도를 보인다
 def sol1927_2():
-    cmd = list(map(int, input().splitlines()))[1:]
+    n, *cmd = map(int, input().splitlines())
     heap = []
     answer = []
     for c in cmd:
-        if (c == 0):
+        if(c==0):
             answer.append('0' if not heap else str(heapq.heappop(heap)))
         else:
             heapq.heappush(heap, c)
