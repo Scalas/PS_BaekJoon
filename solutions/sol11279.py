@@ -65,7 +65,7 @@ def sol11279():
 
 # heapq 모듈을 사용하여 간단하게 구현 가능
 # 직접 힙을 구현한 것 보다 훨씬 빠른 속도를 보임
-def sol11279():
+def sol11279_2():
     n = int(input())
     cmds = [int(input()) for _ in range(n)]
     q = []
