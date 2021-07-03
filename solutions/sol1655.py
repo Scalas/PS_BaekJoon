@@ -1,8 +1,6 @@
 import sys
 import heapq
 
-input = sys.stdin.readline
-
 
 # 1655 가운데를 말해요
 # 힙을 활용한 중간값 찾기 문제
@@ -15,20 +13,21 @@ input = sys.stdin.readline
 # 둘의 크기 차이가 2가 될 경우 큰쪽을 하나 pop 하여 작은 쪽으로 push 하는 것으로 균형을 맞춘다
 # 하나의 숫자가 삽입될 때마다 중간값은 두 힙중 크기가 큰쪽의 top, 두 힙의 크기가 같다면 최대힙의 top 이 된다
 def sol1655():
-    bh, sh = [], []
+    maxq, minq = [], []
+    n, *nums = map(int, sys.stdin.read().split())
     answer = []
-    for n in range(int(input())):
-        num = int(input())
-        if not bh:
-            heapq.heappush(bh, -num)
+    for num in nums:
+        if not maxq or num <= -maxq[0]:
+            heapq.heappush(maxq, -num)
         else:
-            if(num<=-bh[0]):
-                heapq.heappush(bh, -num)
-            else:
-                heapq.heappush(sh, num)
-        if(len(bh)==len(sh)+2):
-            heapq.heappush(sh, -heapq.heappop(bh))
-        elif(len(sh)==len(bh)+2):
-            heapq.heappush(bh, -heapq.heappop(sh))
-        answer.append(str(-bh[0]) if len(bh) >= len(sh) else str(sh[0]))
+            heapq.heappush(minq, num)
+        diff = len(maxq) - len(minq)
+        if diff == 2:
+            heapq.heappush(minq, -heapq.heappop(maxq))
+            diff = 0
+        elif diff == -2:
+            heapq.heappush(maxq, -heapq.heappop(minq))
+            diff = 0
+
+        answer.append(str(-maxq[0] if diff >= 0 else minq[0]))
     print('\n'.join(answer))
