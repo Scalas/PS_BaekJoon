@@ -4,6 +4,8 @@ from collections import deque
 input = sys.stdin.readline
 
 
+# 1260 DFS와 BFS
+# 주어진 그래프를 주어진 정점에서 시작하여 DFS와 BFS로 각각 순회하여 그 순서를 출력
 def sol1260():
     n, m, v = map(int, input().split())
     g = [[] for _ in range(n + 1)]
