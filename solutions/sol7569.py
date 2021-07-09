@@ -1,9 +1,13 @@
 import sys
 
+input = sys.stdin.readline
+m, n, h = map(int, input().split())
+tomato = [[list(map(int, input().split())) for _ in range(n)] for _ in range(h)]
+
 
 # 7569 토마토
 # 7568 토마토 문제의 3차원버전
-def sol7569(m, n, h, tomato):
+def sol7569():
     q = []
     cnt = 0
     for i in range(h):
@@ -50,9 +54,5 @@ def sol7569(m, n, h, tomato):
     return -1 if cnt else answer
 
 
-input = sys.stdin.readline
-m, n, h = map(int, input().split())
-tomato = [[list(map(int, input().split())) for _ in range(n)] for _ in range(h)]
-
 if __name__ == '__main__':
-    print(sol7569(m, n, h, tomato))
+    print(sol7569())
