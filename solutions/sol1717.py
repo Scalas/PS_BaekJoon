@@ -38,10 +38,10 @@ def union(u, a, b):
         # 두 집합 중 보다 크기가 큰쪽에 작은쪽을 붙여야 트리의 깊이를 줄일 수 있다.
         if u[a] < u[b]:
             u[a] += u[b]
-            u[a] = b
+            u[b] = a
         else:
             u[b] += u[a]
-            u[b] = a
+            u[a] = b
 
 
 # x의 루트노드 탐색
