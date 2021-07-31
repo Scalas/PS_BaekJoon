@@ -2,13 +2,17 @@ import sys
 from itertools import combinations
 from bisect import bisect_right
 
+input = sys.stdin.read
+
 
 # 1450 냅색문제
 # 무게제한이 있는 가방에 물건을 담을 수 있는 경우의 수를 구하는 문제
 # 주어진 물건들의 무게의 부분집합 중 합이 무게제한보다 작거나 같은 것의 갯수를 구해야한다
 # 단순히 풀면 물건 N개가 각각 포함되는가 포함되지 않는가 두가지 경우가 있기 때문에 O(2^N)의 시간복잡도를 보인다
 # meet in the middle 알고리즘을 사용하면 이를 획기적으로 줄일 수 있다.
-def sol1450(n, c, items):
+def sol1450():
+    n, c, *items = map(int, input().split())
+
     # 주어진 물건들의 무게 리스트를 절반으로 분할
     left, right = items[:n // 2], items[n // 2:]
 
@@ -38,9 +42,3 @@ def sol1450(n, c, items):
         answer += bisect_right(rs, c - s) * cnt
 
     return answer
-
-
-if __name__ == '__main__':
-    input = sys.stdin.read
-    n, c, *items = map(int, input().split())
-    print(sol1450(n, c, items))
