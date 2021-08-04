@@ -17,6 +17,7 @@ def sol1450():
     left, right = items[:n // 2], items[n // 2:]
 
     # left 에 속한 물건들을 조합하여 얻을 수 있는 합(key)과 그 합을 얻을 수 있는 경우의 수(value)를 구한다
+    # 단순히 리스트에 넣는 방법도 있지만 중복되는 값이 많은 경우 시간을 줄일 수 있다.
     ls = {}
     for case in [map(sum, combinations(left, i)) for i in range(len(left) + 1)]:
         for s in case:
