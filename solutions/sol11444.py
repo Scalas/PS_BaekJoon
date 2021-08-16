@@ -18,22 +18,21 @@ def sol11444():
         return
     fibo = [[0, 1]]
     mat = [[0, 1], [1, 1]]
-    fibo = matmult(fibo, matsq(mat, n - 1))
+    fibo = matmul(fibo, matsq(mat, n - 1))
     print(fibo[0][1])
 
 
-def matmult(a, b):
+def matmul(a, b):
     r, c, m = len(a), len(b[0]), len(b)
     b = list(zip(*b))
     return [[sum([i * j for i, j in zip(a[row], b[col])]) % mod for col in range(c)] for row in range(r)]
 
 
-def matsq(a, b):
-    if b == 1:
-        return a
-    m = b // 2
-    res = matsq(a, m)
-    res = matmult(res, res)
-    if b % 2 != 0:
-        res = matmult(res, a)
+def matsq(m, x):
+    if x == 1:
+        return m
+    res = matsq(m, x//2)
+    res = matmul(res, res)
+    if x % 2:
+        res = matmul(res, m)
     return res
