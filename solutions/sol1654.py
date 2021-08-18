@@ -1,4 +1,6 @@
-from sys import stdin, stdout
+import sys
+
+input = sys.stdin.read
 
 
 # 1654 랜선 자르기
