@@ -87,7 +87,3 @@ def sol2213():
 
     # 최대 독립 집합의 크기와 최대 독립집합을 오름차순 정렬한 결과를 반환
     return str(size) + '\n' + ' '.join(map(str, sorted(subset)))
-
-
-if __name__ == '__main__':
-    print(sol2213())
