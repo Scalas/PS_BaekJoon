@@ -26,28 +26,24 @@ def sol2213():
     mis = [[-1, -1] for _ in range(n + 1)]
 
     # mis의 값을 채우기 위한 탐색 함수
-    def make_set(prev, cur, include):
-        # 현재 노드가 아직 방문되지 않았을 경우
-        if mis[cur][0] == -1:
-            # 현재 노드가 독립집합에 포함되지 않은 경우와 포함된 경우의 최대 독립 집합 크기를 초기화
-            mis[cur] = [0, w[cur]]
+    def make_set(prev, cur):
+        # 현재 노드가 독립집합에 포함되지 않은 경우와 포함된 경우의 최대 독립 집합 크기를 초기화
+        mis[cur] = [0, w[cur]]
 
-            # 현재 노드의 자식 노드 순회하며 최대 독립집합의 크기를 합산
-            for nxt in g[cur]:
-                if nxt != prev:
-                    # 자식노드를 포함하지 않은 경우의 최대 독립 집합 크기
-                    ninc = make_set(cur, nxt, 0)
+        # 현재 노드의 자식 노드 순회하며 최대 독립집합의 크기를 합산
+        for nxt in g[cur]:
+            if nxt != prev:
+                # 자식노드를 포함하지 않는 경우와 포함하는 경우의 최대 독립 집합 크기
+                inc, ninc = make_set(cur, nxt)
 
-                    # 자식노드를 포함한 경우의 최대 독립 집합 크기
-                    inc = make_set(cur, nxt, 1)
+                # 현재 노드가 포함된 상태일 경우 자식노드는 포함되지 않은 경우만 고를 수 있다.
+                mis[cur][1] += inc
 
-                    # 현재 노드가 포함된 상태일 경우 자식노드는 포함되지 않은 경우만 고를 수 있다.
-                    mis[cur][1] += ninc
+                # 현재 노드가 포함되지 않은 상태일 경우 자식노드는 모든 경우중 더 큰 값을 고를 수 있다.
+                mis[cur][0] += max(inc, ninc)
 
-                    # 현재 노드가 포함되지 않은 상태일 경우 자식노드는 모든 경우중 더 큰 값을 고를 수 있다.
-                    mis[cur][0] += max(ninc, inc)
-            # 현재 노드에서의 최대 독립 집합의 크기 중 요청받은 상태에 해당하는 값을 반환(포함/제외)
-        return mis[cur][include]
+        # 현재 노드에서의 최대 독립 집합의 크기를 반환
+        return mis[cur]
 
     # 실제 최대 독립 집합을 구하기 위한 추적 함수
     def trace_set(prev, cur, include):
@@ -76,14 +72,12 @@ def sol2213():
         # 최대 독립 집합 반환
         return res
 
-    size, subset = 0, None
-    # 루트 노드로 삼을 1번 노드가 포함된 경우와 포함되지 않은 경우중 큰 쪽을 선택
-    if make_set(0, 1, 0) > make_set(0, 1, 1):
-        size = make_set(0, 1, 0)
-        subset = trace_set(0, 1, 0)
-    else:
-        size = make_set(0, 1, 1)
-        subset = trace_set(0, 1, 1)
+    # 탐색 시작
+    make_set(0, 1)
 
+    # 루트 노드로 삼을 1번 노드가 포함된 경우와 포함되지 않은 경우중 큰 쪽을 선택
     # 최대 독립 집합의 크기와 최대 독립집합을 오름차순 정렬한 결과를 반환
-    return str(size) + '\n' + ' '.join(map(str, sorted(subset)))
+    if mis[1][0] > mis[1][1]:
+        return str(mis[1][0]) + '\n' + ' '.join(map(str, sorted(trace_set(0, 1, 0))))
+    else:
+        return str(mis[1][1]) + '\n' + ' '.join(map(str, sorted(trace_set(0, 1, 1))))
