@@ -10,8 +10,8 @@ def sol11758():
     # 세 점의 좌표
     ax, ay, bx, by, cx, cy = map(int, input().split())
 
-    # 벡터의 외적공식 적용(절댓값 취하지 않음)
+    # CCW 알고리즘 적용
     res = (ax * by + bx * cy + cx * ay) - (bx * ay + cx * by + ax * cy)
 
-    # 결과값이 0과 같다면 일직선, 0보다 크다면 반시계방향, 작다면 시계방향
+    # 결과값이 0이라면 일직선, 0보다 크다면 반시계방향, 작다면 시계방향
     return 0 if res == 0 else (1 if res > 0 else -1)
