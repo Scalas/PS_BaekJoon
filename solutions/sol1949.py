@@ -5,6 +5,9 @@ sys.setrecursionlimit(1000000)
 input = sys.stdin.readline
 
 
+# 1949 우수 마을
+# 서로 인접하지 않은 마을의 집합 중 인구 수의 총합이 가장 큰 경우의 총 인구수를 구하는 문제
+# 즉, 트리의 최대독립집합 문제이다.
 def sol1949():
     # 노드의 갯수
     n = int(input())
