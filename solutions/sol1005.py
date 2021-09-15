@@ -43,7 +43,7 @@ def sol1005():
 
         # dfs(w)를 구하여 정답 리스트에 저장
         dp = [-1] * (n + 1)
-        w = int(input()
+        w = int(input())
         answer.append(dfs(w))
 
         # 출력 형식에 맞춰 정답 리스트 반환
