@@ -76,7 +76,3 @@ def sol3176():
         answer.append('%d %d' % (min_d, max_d))
 
     return '\n'.join(answer)
-
-
-if __name__ == '__main__':
-    print(sol3176())
