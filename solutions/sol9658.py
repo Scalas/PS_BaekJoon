@@ -26,5 +26,4 @@ def sol9658():
 # 승패는 돌이 1개일때부터 시작하여 -1, 1, -1, 1, 1, 1, 1 을 반복한다.
 # 즉, n % 7 이 1, 3 일 때를 제외하면 상근이가 이긴다는 사실을 알 수 있다.
 def sol9658_2():
-    dp = [1, -1, 1, -1, 1, 1, 1]
-    return 'SK' if dp[int(input()) % 7] > 0 else 'CY'
+    return 'CY' if int(input()) % 7 in {1, 3} else 'SK'
