@@ -3,6 +3,9 @@ import sys
 input = sys.stdin.readline
 
 
+# 16724 피리부는 사나이
+# n * m 공간의 각 칸에 이동방향이 적혀있을 때
+# 이어져있는 공간의 집합의 갯수를 구하는 문제
 def sol16724():
     n, m = map(int, input().split())
     size = n * m
