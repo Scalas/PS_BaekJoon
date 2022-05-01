@@ -9,7 +9,6 @@ input = sys.stdin.readline
 # 두사람이 서로를 보기 위해서는 두 사람 사이에 둘 중 하나보다 키가 큰 사람이 없어야 함
 def sol3015():
     n = int(input())
-    heights = [int(input()) for _ in range(n)]
     st = []
     answer = 0
     for _ in range(n):
